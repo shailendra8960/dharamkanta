@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<html>
+{%load staticfiles %}
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>DHARAM KATA</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+
+  <!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{%static 'css1/animate.css'%}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{%static 'css1/icomoon.css'%}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{%static 'css1/bootstrap.css'%}">
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="{%static 'css1/flexslider.css'%}">
+	<!-- Flaticons  -->
+	<link rel="stylesheet" href="{%static 'fonts1/flaticon/font/flaticon.css'%}">
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="{%static 'css1/owl.carousel.min.css'%}">
+	<link rel="stylesheet" href="{%static 'css1/owl.theme.default.min.css'%}">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="{%static 'css1/style.css'%}">
+
+	<!-- Modernizr JS -->
+	<script src="{%static 'js1/modernizr-2.6.2.min.js'%}"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="{%static 'js1/respond.min.js'%}"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
+			<h1 id="colorlib-logo"><a href="{%url 'index'%}">Dharam Kata</a></h1>
+			<nav id="colorlib-main-menu" role="navigation">
+				<ul>
+					<li><a href="{%url 'index'%}">Home</a></li>
+					<li class="colorlib-active"><a href="{%url 'product'%}">Product</a></li>
+					<li><a href="{%url 'about'%}">About</a></li>
+					<li><a href="{%url 'contact'%}">Contact</a></li>
+				</ul>
+			</nav>
+
+			<div class="colorlib-footer">
+			<p><small>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This Project is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Sailendra Singh</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </span> </small></p>	<ul>
+					<li><a href="#"><i class="icon-facebook2"></i></a></li>
+					<li><a href="#"><i class="icon-twitter2"></i></a></li>
+					<li><a href="#"><i class="icon-instagram"></i></a></li>
+					<li><a href="#"><i class="icon-linkedin2"></i></a></li>
+				</ul>
+			</div>
+
+		</aside>
+
+		<div id="colorlib-main">
+			<div class="colorlib-work">
+				<div class="colorlib-narrow-content">
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+							<span class="heading-meta">MY PRODUCT</span>
+							<h2 class="colorlib-heading">OUR PRODUCT</h2>
+						</div>
+
+						<div  class = "container">
+										{% for product, range, nslides in allProds %}
+										<h4 class="my-4">{{product.0.p_category}}</h4>
+										<div id="demo{{forloop.counter}}" class="carousel slide my-3" data-ride="carousel">
+										<ul class="carousel-indicators">
+										  <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
+											{% for i in range %}
+										  <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}" ></li>
+										{% endfor %}
+										</ul>
+
+
+
+
+										  <!--    Slide show start here-->
+										<div class="container carousel-inner no-padding ">
+
+										   <div class="carousel-item active ">
+
+
+											  {% for i in product %}
+											<div class="col-xs-3 col-sm-3 col-md-3 " style="margin-top:4%;">
+											  <div class="card my-4" style="width: 18rem;">
+												<img src='{{i.p_img.url}}'  class="card-img-top" alt="..." width="100%" height="100%">
+												<div class="card-body">
+													<h5 class="card-title">{{i.p_name}}</h5>
+													<p class="card-text">{{i.p_desc}}</p>
+												 <a href="{% url 'product' i.p_id%} " class="btn btn-primary cart float-right" >Detail</a>
+
+												</div>
+
+
+
+
+
+
+											  </div>
+											</div>
+
+											   {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
+										   </div><div class="carousel-item">
+											   {% endif %}
+
+
+
+
+											   {% endfor %}
+
+										   </div>
+
+
+
+											  <!-- -------------Booking Dialog------------------------- -->
+
+
+
+									<!--			  <div class="modal fade " id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">-->
+									<!--  <div class="modal-dialog" >-->
+									<!--    <div class="modal-content">-->
+									<!--      <div class="modal-header">-->
+									<!--        <h5 class="modal-title" id="exampleModalLongTitle">Booking</h5>-->
+									<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+									<!--          <span aria-hidden="true">&times;</span>-->
+									<!--        </button>-->
+									<!--      </div>-->
+									<!--      <div class="modal-body">-->
+									<!--        <form>-->
+									<!--        {% csrf_token %}-->
+									<!--&lt;!&ndash;			<input name="id" value="{{ i.id}}" hidden>&ndash;&gt;-->
+									<!--  <div class="form-row">-->
+									<!--    <div class="form-group col-md-6">-->
+									<!--      <label for="inputEmail4">Email</label>-->
+									<!--      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">-->
+									<!--    </div>-->
+									<!--    <div class="form-group col-md-6">-->
+									<!--      <label for="inputPassword4">Name</label>-->
+									<!--      <input type="text" class="form-control" id="inputPassword4" placeholder="name">-->
+									<!--    </div>-->
+									<!--  </div>-->
+									<!--  <div class="form-group">-->
+									<!--    <label for="inputAddress">Address</label>-->
+									<!--    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">-->
+									<!--  </div>-->
+
+									<!--  <div class="form-row">-->
+									<!--    <div class="form-group col-md-6">-->
+									<!--      <label for="inputCity">City</label>-->
+									<!--      <input type="text" class="form-control" id="inputCity">-->
+									<!--    </div>-->
+									<!--    <div class="form-group col-md-4">-->
+									<!--      <label for="inputState">State</label>-->
+									<!--      <select id="inputState" class="form-control">-->
+									<!--        <option selected>Choose...</option>-->
+									<!--        <option>...</option>-->
+									<!--      </select>-->
+									<!--    </div>-->
+									<!--    <div class="form-group col-md-2">-->
+									<!--      <label for="inputZip">Zip</label>-->
+									<!--      <input type="text" class="form-control" id="inputZip">-->
+									<!--    </div>-->
+									<!--  </div>-->
+									<!--  <div class="form-group">-->
+									<!--    <label for="inputAddress">Booking Date</label>-->
+									<!--    <input type="date" class="form-control" id="bookingdate" placeholder="1234 Main St">-->
+									<!--  </div>-->
+
+									<!--</form>-->
+									<!--      </div>-->
+									<!--      <div class="modal-footer">-->
+									<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+									<!--        <button type="button" class="btn btn-primary"  data-target="#bookingdialogdone" data-dismiss="modal" aria-hidden="true">Submit</button>-->
+									<!--      </div>-->
+									<!--    </div>-->
+									<!--  </div>-->
+									<!--</div>-->
+
+											<!---------------booking Done------------------->
+
+										</div>
+
+
+
+
+
+									<!--<div class="modal" tabindex="-1" role="dialog" id="bookingdialogdone">-->
+									<!--  <div class="modal-dialog" role="document">-->
+									<!--    <div class="modal-content">-->
+									<!--      <div class="modal-header">-->
+									<!--        <h5 class="modal-title">Modal title</h5>-->
+									<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+									<!--          <span aria-hidden="true">&times;</span>-->
+									<!--        </button>-->
+									<!--      </div>-->
+									<!--      <div class="modal-body">-->
+									<!--        <p>Modal body text goes here.</p>-->
+									<!--      </div>-->
+									<!--      <div class="modal-footer">-->
+									<!--        <button type="button" class="btn btn-primary">Save changes</button>-->
+									<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+									<!--      </div>-->
+									<!--    </div>-->
+									<!--  </div>-->
+									<!--</div>-->
+
+
+
+
+
+									<a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
+
+									  <span class="carousel-control-prev-icon"></span>
+									</a>
+
+										<a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
+
+									  <span class="carousel-control-next-icon"></span>
+									</a>
+											</div>
+										<hr>
+
+									<!---------------booking dialog end------------------->
+									{% endfor %}
+									</div>
+
+
+
+					</div>
+
+				</div>
+			</div>
+
+			<div id="get-in-touch" class="colorlib-bg-color">
+				<div class="colorlib-narrow-content">
+					<div class="row">
+						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+							<h2>Get in Touch!</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+							<p class="colorlib-lead">Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+							<p><a href="#" class="btn btn-primary btn-learn">Contact me!</a></p>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="{%static 'js1/jquery.min.js'%}"></script>
+	<!-- jQuery Easing -->
+	<script src="{%static 'js1/jquery.easing.1.3.js'%}"></script>
+	<!-- Bootstrap -->
+	<script src="{%static 'js1/bootstrap.min.js'%}"></script>
+	<!-- Waypoints -->
+	<script src="{%static 'js1/jquery.waypoints.min.js'%}"></script>
+	<!-- Flexslider -->
+	<script src="{%static 'js1/jquery.flexslider-min.js'%}"></script>
+	<!-- Sticky Kit -->
+	<script src="{%static 'js1/sticky-kit.min.js'%}"></script>
+	<!-- Owl carousel -->
+	<script src="{%static 'js1/owl.carousel.min.js'%}"></script>
+	<!-- Counters -->
+	<script src="{%static 'js1/jquery.countTo.js'%}"></script>
+	
+	
+	<!-- MAIN JS -->
+	<script src="{%static 'js1/main.js'%}"></script>
+
+	</body>
+</html>
+
